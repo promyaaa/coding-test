@@ -44,7 +44,7 @@ export default {
   },
   created() {
     var self = this;
-    axios.get(`http://localhost:8080/data/sampletwo.json`)
+    axios.get(`http://localhost:8080/data/sample.json`)
     .then(response => {
       self.rowdata = response.data;
     });
