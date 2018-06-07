@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div id="app">
       <h1>Table Component</h1>
       <table style="width:100%">
@@ -62,3 +62,4 @@ export default {
 <style>
 
 </style>
+ -->
