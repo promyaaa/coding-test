@@ -1,5 +1,5 @@
 <template>
-  <div class="app-settings">
+  <div>
     <table>
       <thead>
         <tr>
@@ -44,17 +44,9 @@ export default {
   },
   created() {
     var self = this;
-    axios.get(`http://localhost:8080/data/sample.json`)
+    axios.get(`http://localhost:8080/data/sampletwo.json`)
     .then(response => {
-      // JSON responses are automatically parsed.
       self.rowdata = response.data;
-      // self.informations = response.data;
-      // for(var i=0; i< response.data.length; i++) {
-        // uniqueKeys = Object.keys(self.userInfo.reduce(function(result, obj) {
-        //   return Object.assign(result, obj);
-        // }, {}))
-      // }
-      // self.header = uniqueKeys;
     });
   }
 };
