@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     orderBy(p) {
-      this.rowdata.sort(function(a,b) {
+      this.rowdata.sort((a,b) => {
         return (a[p] > b[p]) ? 1 : (a[p] < b[p]) ? -1 : 0;
       });
     },
@@ -59,8 +59,8 @@ export default {
     },
     getColumn() {
       var result = [];
-      this.rowdata.forEach( function( item ){
-        Object.keys( item ).forEach( function( col ) {
+      this.rowdata.forEach( item => {
+        Object.keys( item ).forEach( col => {
           if ( result.indexOf( col ) == -1 ) {
             result.push( col );
           }
@@ -72,7 +72,7 @@ export default {
   created() {
     var self = this;
     axios.get(`http://localhost:8080/data/sample.json`)
-    .then(response => {
+    .then( response => {
       self.rowdata = response.data;
     });
   }
