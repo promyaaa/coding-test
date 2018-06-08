@@ -9,9 +9,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in rowdata">
-          <td v-for="column in getColumn()">
-            {{ item[column] || '' }}
+        <tr v-for="(item, index) in rowdata">
+          <td v-for="column in getColumn()" >
+            <span v-if="editindex !== item[column]" @click="edit(item, column, index)">{{ item[column] || '' }}</span>
+            <span v-if="editindex === item[column]">
+              <input type="text" v-model="editText">
+              <button @click="save(item, column, index)">save</button>
+              <button @click="cancel">cancel</button>
+            </span>
           </td>
         </tr>
       </tbody>
@@ -24,12 +29,25 @@ export default {
   name: 'Test',
   data () {
     return {
-      rowdata: [
-    
-      ]
+      rowdata: [],
+      editindex: -1,
+      editText: '',
     };
   },
   methods: {
+    cancel() {
+      this.editindex = -1;
+      this.editText = '';
+    },
+    edit(item, column, index) {
+      this.editindex = item[column];
+      this.editText = item[column];
+    },
+    save( item, column ) {
+      item[column] = this.editText;
+      this.editindex = -1;
+      this.editText = '';
+    },
     getColumn() {
       var result = [];
       this.rowdata.forEach( function( item ){
