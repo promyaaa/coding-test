@@ -52,6 +52,7 @@ export default {
       item[column] = this.editText;
       this.editindex = -1;
       this.editText = '';
+      console.log(item[column]);
     },
     getColumn() {
       var result = [];
