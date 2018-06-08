@@ -3,14 +3,14 @@
     <table>
       <thead>
         <tr>
-          <th v-for="column in getColumn()">
+          <th v-for="column in getColumn()" @click="orderBy(column)">
             {{ column }}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(item, index) in rowdata">
-          <td v-for="column in getColumn()" >
+          <td v-for="column in getColumn()">
             <span v-if="editindex !== item[column]" @click="edit(item, column, index)">{{ item[column] || '' }}</span>
             <span v-if="editindex === item[column]">
               <input type="text" v-model="editText">
@@ -31,10 +31,15 @@ export default {
     return {
       rowdata: [],
       editindex: -1,
-      editText: '',
+      editText: ''
     };
   },
   methods: {
+    orderBy(p) {
+      this.rowdata.sort(function(a,b) {
+        return (a[p] > b[p]) ? 1 : (a[p] < b[p]) ? -1 : 0;
+      });
+    },
     cancel() {
       this.editindex = -1;
       this.editText = '';
