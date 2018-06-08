@@ -11,8 +11,8 @@
       <tbody>
         <tr v-for="(item, index) in rowdata">
           <td v-for="column in getColumn()">
-            <span v-if="editindex !== item[column]" @click="edit(item, column, index)">{{ item[column] || '' }}</span>
-            <span v-if="editindex === item[column]">
+            <span v-if="editval !== item[column] && editIndex !== index" @click="edit(item, column, index)">{{ item[column] || '' }}</span>
+            <span v-if="editval === item[column] && editIndex === index">
               <input type="text" v-model="editText">
               <button @click="save(item, column, index)">save</button>
               <button @click="cancel">cancel</button>
@@ -30,7 +30,8 @@ export default {
   data () {
     return {
       rowdata: [],
-      editindex: -1,
+      editval: -1,
+      editIndex: -1,
       editText: ''
     };
   },
@@ -41,16 +42,18 @@ export default {
       });
     },
     cancel() {
-      this.editindex = -1;
+      this.editval = -1;
       this.editText = '';
     },
     edit(item, column, index) {
-      this.editindex = item[column];
+      this.editval = item[column];
+      this.editIndex = index;
       this.editText = item[column];
     },
     save( item, column ) {
       item[column] = this.editText;
-      this.editindex = -1;
+      this.editval = -1;
+      this.editIndex = -1;
       this.editText = '';
       console.log(item[column]);
     },
