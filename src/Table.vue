@@ -43,6 +43,7 @@ export default {
     },
     cancel() {
       this.editval = -1;
+      this.editIndex = -1;
       this.editText = '';
     },
     edit(item, column, index) {
